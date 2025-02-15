@@ -72,7 +72,7 @@ const Index = () => {
         },
         { Header: "Date & Time", accessor: "dateTime", },
         { Header: "Time Stamp", accessor: "timestamp", },
-        { Header: "Create By", accessor: "createdByName", },
+        { Header: "Create By", accessor: "createBy.username", },
         ...(permission?.update || permission?.view || permission?.delete ? [actionHeader] : [])
 
     ];
@@ -91,7 +91,7 @@ const Index = () => {
     const handleDeleteMeeting = async (ids) => {
         try {
             setIsLoding(true)
-            let response = await deleteManyApi('api/meeting/deleteMany', ids)
+            let response = await deleteManyApi('api/meeting/deleteMany', {ids})
             if (response.status === 200) {
                 setSelectedValues([])
                 setDeleteMany(false)
@@ -158,7 +158,7 @@ const Index = () => {
                 setGetTagValues={setGetTagValuesOutside}
                 setSearchbox={setSearchboxOutside}
             />
-            <AddMeeting setAction={setAction} isOpen={isOpen} onClose={onClose} />
+            <AddMeeting fetchData={fetchData} setAction={setAction} isOpen={isOpen} onClose={onClose} />
 
             {/* Delete model */}
             <CommonDeleteModel isOpen={deleteMany} onClose={() => setDeleteMany(false)} type='Meetings' handleDeleteData={handleDeleteMeeting} ids={selectedValues} />

@@ -22,7 +22,7 @@ const MeetingView = (props) => {
     const fetchViewData = async () => {
         if (info) {
             setIsLoding(true)
-            let result = await getApi('api/meeting/view/', info?.event ? info?.event?.id : info);
+            let result = await getApi('api/meeting/', info?.event ? info?.event?.id : info);
             setData(result?.data);
             setIsLoding(false)
         }
@@ -67,7 +67,7 @@ const MeetingView = (props) => {
                                 </GridItem>
                                 <GridItem colSpan={{ base: 12, md: 6 }} >
                                     <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Created By </Text>
-                                    <Text>{data?.createdByName ? data?.createdByName : '-'}</Text>
+                                    <Text>{data?.createBy.username ? data?.createBy.username : '-'}</Text>
                                 </GridItem>
                                 <GridItem colSpan={{ base: 12, md: 6 }} >
                                     <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Related </Text>

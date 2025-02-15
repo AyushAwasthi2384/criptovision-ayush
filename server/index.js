@@ -15,8 +15,15 @@ const path = require('path');
 const app = express();
 // Middleware
 app.use(bodyParser.json());
+
 // Set up CORS  
-app.use(cors())
+app.use(cors({
+    origin: (origin, cb) => cb(null, true),
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 //API Routes
 app.use('/api', route);
 

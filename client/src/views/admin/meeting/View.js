@@ -28,7 +28,7 @@ const View = () => {
 
     const fetchData = async () => {
         setIsLoding(true)
-        let response = await getApi('api/meeting/view/', param.id)
+        let response = await getApi(`api/meeting/${param.id}`)
         setData(response?.data);
         setIsLoding(false)
     }
@@ -121,7 +121,7 @@ const View = () => {
                                     </GridItem>
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
                                         <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Created By </Text>
-                                        <Text>{data?.createdByName ? data?.createdByName : ' - '}</Text>
+                                        <Text>{data?.createBy?.username ? data?.createBy?.username : ' - '}</Text>
                                     </GridItem>
 
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -145,7 +145,7 @@ const View = () => {
                                         {data?.related === 'Contact' && contactAccess?.view ? data?.attendes && data?.attendes.map((item) => {
                                             return (
                                                 <Link to={`/contactView/${item._id}`}>
-                                                    <Text color='brand.600' sx={{ '&:hover': { color: 'blue.500', textDecoration: 'underline' } }}>{item.firstName + ' ' + item.lastName}</Text>
+                                                    <Text color='brand.600' sx={{ '&:hover': { color: 'blue.500', textDecoration: 'underline' } }}>{item.fullName}</Text>
                                                 </Link>
                                             )
                                         }) : data?.related === 'Lead' && leadAccess?.view ? data?.attendesLead && data?.attendesLead.map((item) => {
